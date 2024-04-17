@@ -58,6 +58,12 @@ try:
 
             # 매장 페이지 로딩 대기
             time.sleep(0.5)
+            driver.execute_script("window.scrollBy(0, 10);")  # 수직으로 50 픽셀만큼 스크롤 다운
+            time.sleep(1)
+            driver.execute_script("window.scrollBy(0, 1000);")  # 수직으로 100 픽셀만큼 스크롤 다운
+            time.sleep(1)
+            driver.execute_script("window.scrollBy(0, 1500);")  # 수직으로 100 픽셀만큼 스크롤 다운
+            time.sleep(1)
 
             # 이전 페이지로 이동 (뒤로 가기)
             driver.execute_script("window.history.go(-1);")
