@@ -210,7 +210,7 @@ except Exception as e:
 
 
 
-#############################################베스트 리뷰############################################
+############################################유저들의 리얼 리뷰############################################
 
 # 리뷰 게시물 요소 찾기
 tab_links = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".v-scroll-inner .best-review-item")))
