@@ -148,6 +148,56 @@ except Exception as e:
 
 
 
+#################### 추천 해시태그
+try:
+    # 상황별 주제별 BEST 찾기
+    tab_links = WebDriverWait(driver, 10).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".swiper-slide a"))
+    )
+
+    max_retries = 1
+
+    # 링크를 클릭하여 해당 페이지에 접근
+    for i in range(len(tab_links)):
+        for attempt in range(max_retries):
+            try:
+                # 링크 다시 찾기
+                tab_links = WebDriverWait(driver, 10).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".swiper-slide a"))
+                )
+                link = tab_links[i]
+                link_text = link.text
+                link.click()
+                print(f"{link_text} 추천 해시태그 페이지에 접근했습니다.")
+
+                # 페이지 로드를 기다림
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )
+
+                # 스크롤 다운
+                time.sleep(2)
+                driver.execute_script("window.scrollBy(0, 10);")  # 수직으로 50 픽셀만큼 스크롤 다운
+                time.sleep(1)
+                driver.execute_script("window.scrollBy(0, 1000);")  # 수직으로 100 픽셀만큼 스크롤 다운
+                time.sleep(1)
+                driver.execute_script("window.scrollBy(0, 1500);")  # 수직으로 100 픽셀만큼 스크롤 다운
+                time.sleep(1)
+
+                # 뒤로 가기
+                driver.back()
+                time.sleep(2)
+                break  # 성공적으로 링크를 클릭했으면 다음 링크로 이동
+
+            except Exception as e:
+                print("링크를 찾고 있습니다.:", e)
+
+except Exception as e:
+    print(f"오류 발생: {e}")
+
+
+
+
 
 # 드라이버 종료 (실행이 끝난 후 브라우저를 닫음)
 driver.quit()
